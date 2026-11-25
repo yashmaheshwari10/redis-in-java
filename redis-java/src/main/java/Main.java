@@ -5,8 +5,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Main {
+    public static void main(String[] args) {
+       hi
+    }
 
-   public static void handleClient(Socket clientSocket) {
+    public static void handleClient(Socket clientSocket) {
         try (Socket socket = clientSocket) {
             InputStream in = socket.getInputStream();
             OutputStream out = socket.getOutputStream();
@@ -20,21 +23,4 @@ public class Main {
             System.out.println("IOException: " + e.getMessage());
         }
     }
-    
-    public static void main(String[] args) {
-        int port = 6379;
-        try (ServerSocket serverSocket = new ServerSocket()) {
-            serverSocket.setReuseAddress(true);
-            serverSocket.bind(new java.net.InetSocketAddress(port));
-
-            while (true) {
-                Socket clientSocket = serverSocket.accept();
-                new Thread(() -> handleClient(clientSocket)).start();
-            }
-        } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
-        }
-    }
-
-   
 }
