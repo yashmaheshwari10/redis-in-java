@@ -38,7 +38,7 @@ public class Main {
 
   }
 
-  public static void handelClient(Socket clientSocket){
+  public static void handleClient(Socket clientSocket){
     try{
       InputStream in = clientSocket.getInputStream();
       OutputStream out = socket.getOutputStream();
