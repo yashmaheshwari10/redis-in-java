@@ -6,7 +6,18 @@ import java.net.Socket;
 
 public class Main {
     public static void main(String[] args) {
-       hi
+        int port = 6379;
+        try (ServerSocket serverSocket = new ServerSocket()) {
+            serverSocket.setReuseAddress(true);
+            serverSocket.bind(new java.net.InetSocketAddress(port));
+
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                new Thread(() -> handleClient(clientSocket)).start();
+            }
+        } catch (IOException e) {
+            System.out.println("IOException: " + e.getMessage());
+        }
     }
 
     public static void handleClient(Socket clientSocket) {
